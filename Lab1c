@@ -1,0 +1,33 @@
+
+
+## (c) Synchronization Example
+
+```java
+class Table {
+    synchronized void print(int n) {
+        for (int i=1; i<=5; i++) {
+            System.out.println(n*i);
+            try { Thread.sleep(500); }
+            catch (Exception e) {}
+        }
+    }
+}
+
+class SyncDemo {
+    public static void main(String[] args) {
+        Table t = new Table();
+
+        Thread t1 = new Thread(() -> t.print(5));
+        Thread t2 = new Thread(() -> t.print(10));
+
+        t1.start();
+        t2.start();
+    }
+}
+
+        Iterator<String> it = books.iterator();
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        }
+    }
+}
