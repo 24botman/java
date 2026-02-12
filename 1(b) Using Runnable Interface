@@ -1,0 +1,48 @@
+
+
+## (b) Using Runnable Interface
+
+```java
+
+class MyRunnable implements Runnable {
+    int start, end, sleepTime;
+
+    MyRunnable(int start, int end, int sleepTime) {
+        this.start = start;
+        this.end = end;
+        this.sleepTime = sleepTime;
+    }
+
+    public void run() {
+        for (int i = start; i <= end; i++) {            System.out.println(Thread.currentThread().getName() + " : " + i);
+            try { Thread.sleep(sleepTime); }
+            catch (InterruptedException e) {}
+        }
+    }
+}
+
+public class RunnableDemo {
+    public static void main(String[] args) throws Exception {
+
+        Thread t1 = new Thread(new MyRunnable(6,10,1000), "ChildThread1");
+        Thread t2 = new Thread(new MyRunnable(11,15,2000), "ChildThread2");
+
+        t1.start();
+        t2.start();
+
+        for (int i=1; i<=5; i++) {
+            System.out.println("MainThread : " + i);
+            Thread.sleep(500);
+        }
+
+        t1.join();
+        t2.join();
+    }
+}
+
+        PrintWriter pw = new PrintWriter(s.getOutputStream(), true);
+        pw.println("Hello Server");
+
+        s.close();
+    }
+}
