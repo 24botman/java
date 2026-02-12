@@ -1,0 +1,41 @@
+1. Multithreading
+(a) Using Thread class
+
+class ChildThread extends Thread {
+    int start, end, sleepTime;
+
+    ChildThread(String name, int start, int end, int sleepTime) {
+        super(name);
+        this.start = start;
+        this.end = end;
+        this.sleepTime = sleepTime;
+    }
+
+    public void run() {
+        for (int i = start; i <= end; i++) {
+            System.out.println(getName() + " : " + i);
+            try { Thread.sleep(sleepTime); } 
+            catch (InterruptedException e) {}
+        }
+    }
+}
+
+public class MultiThreadDemo {
+    public static void main(String[] args) throws Exception {
+
+        Thread t1 = new ChildThread("ChildThread1", 6, 10, 1000);
+        Thread t2 = new ChildThread("ChildThread2", 11, 15, 2000);
+
+        t1.start();
+        t2.start();
+
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("MainThread : " + i);
+            Thread.sleep(500);
+        }
+
+        t1.join();
+        t2.join();
+        System.out.println("Finished");
+    }
+}
